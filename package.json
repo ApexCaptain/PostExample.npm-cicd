@@ -1,0 +1,8 @@
+{
+  "name": "postexample.npm-cicd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ApexCaptain/PostExample.npm-cicd.git",
+  "author": "ApexCaptain <ayteneve93@gmail.com>",
+  "license": "MIT"
+}
