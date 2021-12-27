@@ -1,13 +1,13 @@
 {
   "name": "postexample.npm-cicd",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "repository": "git@github.com:ApexCaptain/PostExample.npm-cicd.git",
   "author": "ApexCaptain <ayteneve93@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dispatch": "",
+    "dispatch": "yarn version",
     "build": "tsc",
     "test@js": "yarn build && mocha ./test/*.spec.js",
     "test@ts": "mocha -r ts-node/register ./test/*.spec.ts"
