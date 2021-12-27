@@ -11,15 +11,13 @@ jobs:
       matrix:
         os: [
             # Ubuntu
-            ubuntu-18.04,
             ubuntu-latest,
             # Windows
-            windows-2022,
             windows-latest,
             # Mac
             macos-latest,
           ]
-        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
+        node-version: [14.x, 16.x]
     runs-on: ${{matrix.os}}
     steps:
       - name: Checkout to current repository
@@ -35,11 +33,8 @@ jobs:
 
   CD:
     name: CD
-
     needs: ci
-
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout to current repository
         uses: actions/checkout@v2
