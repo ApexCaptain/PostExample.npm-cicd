@@ -1,0 +1,63 @@
+name: Ci/Cd - Pipeline
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+jobs:
+  CI:
+    name: CI
+    strategy:
+      matrix:
+        os: [
+            # Ubuntu
+            ubuntu-18.04,
+            ubuntu-latest,
+            # Windows
+            windows-2022,
+            windows-latest,
+            # Mac
+            macos-latest,
+          ]
+        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
+    runs-on: ${{matrix.os}}
+    steps:
+      - name: Checkout to current repository
+      - uses: actions/checkout@v2
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm i
+      - name: Run Build & Test
+        run: npm test@js
+
+  CD:
+    name: CD
+
+    needs: ci
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to current repository
+        uses: actions/checkout@v2
+      - name: Use Node.js v16
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      - name: Create new release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          tag_name: ${{github.ref}}
+          release_name: New Version Release ${{github.ref}}
+          draft: false
+          prerelease: false
