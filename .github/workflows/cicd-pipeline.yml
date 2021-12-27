@@ -31,7 +31,7 @@ jobs:
       - name: Install Dependencies
         run: npm i
       - name: Run Build & Test
-        run: npm test@js
+        run: npm run test@js
 
   CD:
     name: CD
@@ -49,7 +49,7 @@ jobs:
           node-version: "16.x"
           registry-url: https://registry.npmjs.org/
       - name: Build
-        run: npm build
+        run: npm run build
       - name: Publish
         run: npm publish
         env:
