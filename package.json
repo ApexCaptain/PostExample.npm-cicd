@@ -7,7 +7,7 @@
   "author": "ApexCaptain <ayteneve93@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dispatch": "yarn version",
+    "dispatch": "yarn version && git push ",
     "build": "tsc",
     "test@js": "yarn build && mocha ./test/*.spec.js",
     "test@ts": "mocha -r ts-node/register ./test/*.spec.ts"
